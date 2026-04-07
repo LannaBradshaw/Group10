@@ -1,16 +1,15 @@
-
-/*super basic css we can totally change */
-body {
-    background-color: #1E1E2F;
-    color: #FFFFFF;
-    font-family: Arial, sans-serif;
-    margin: 0;
-}
-
 header {
-    background-color: #4CAF50;
+    background-color: #6C508E;
+    color: #0A014F;
     padding: 20px;
     text-align: center;
+}
+
+body {
+    background-color: #CD9FCC;
+    color: #FAE8EB;
+    font-family: Arial, sans-serif;
+    margin: 0;
 }
 
 nav a {
@@ -20,5 +19,9 @@ nav a {
 }
 
 .container {
+    padding: 20px;
+}
+
+.page_body{
     padding: 20px;
 }

@@ -7,14 +7,39 @@ header {
 
 body {
     background-color: #CD9FCC;
-    color: #431c22;
+    color: #0A014F;
     font-family: Arial, sans-serif;
     margin: 0;
 }
 
-nav a {
-    color: #FFC107;
-    margin: 10px;
+nav{
+    text-align: center;
+    width: 100%;
+    background-color: #0A014F;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+nav a{
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: medium;
+}
+
+a:link{
+    color: #CD9FCC;
+    background-color: transparent;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+a:visited{
+    background-color: transparent;
     text-decoration: none;
 }
 

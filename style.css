@@ -21,6 +21,7 @@ nav{
 }
 
 nav a{
+    color: #CD9FCC;
     padding: 5px;
     padding-left: 10px;
     padding-right: 10px;
@@ -33,6 +34,7 @@ a:link{
     text-decoration: none;
 }
 a:hover{
+    color: #CD9FCC;
     text-decoration: underline;
     padding: 5px;
     padding-left: 10px;

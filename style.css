@@ -51,6 +51,14 @@ a:visited{
     padding: 20px;
 }
 
-.bios{
-    list-style-type: none;
+.bio{
+    background-color: #FAE8EB;
+    border-radius: 5%;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.bio_img{
+    float: right;
+    margin-left: 5px;
 }

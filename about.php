@@ -11,6 +11,12 @@
             <h1>About Us</h1>
         </header>
 
+        <nav>
+            <a href="index.php">Homepage</a>
+            <a href="about.php">About</a>
+            <a href="color.php">Color Coordinate</a>
+        </nav>
+
         <div class="page_body">
             <ul class="bios">
                 <li>

@@ -22,16 +22,16 @@
                 <h3>Emma Bass</h3>
             </div>
 
-            <div>
+            <div class="bio">
                 <h3>Lanna Bradshaw</h3>
             </div>
 
-            <div>
+            <div class="bio">
                 <h3>Danae Johnson</h3>
             </div>
 
-            <div>
-                <img src="images/van_img.jpg" alt="Picture of Van" style="width:200px;height:200px">
+            <div class="bio">
+                <img class="bio_img" src="images/van_img.jpg" alt="Picture of Van" style="width:170px">
                 <h3>Van Montgomery</h3>
                 <ul>
                     <li>Third Year Computer Science student with a concentration in Human-Computer Interaction</li>

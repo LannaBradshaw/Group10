@@ -12,12 +12,29 @@
         </header>
 
         <div class="page_body">
-            <div class="bio">
-                <h3>Van Montgomery</h3>
-                <p>I am a 3rd year computer science student with a concentration in HCI!</p>
-                <p>I also have a minor in Creative Writing!</p>
-                <img src="images/van_img.jpg" alt="Picture of Van" style="width:200px;height:200px">
-            </div>
+            <ul class="bios">
+                <li>
+                    <h3>Emma Bass</h3>
+                </li>
+
+                <li>
+                    <h3>Lanna Bradshaw</h3>
+                </li>
+
+                <li>
+                    <h3>Danae Johnson</h3>
+                </li>
+
+                <li class="bio">
+                    <img src="images/van_img.jpg" alt="Picture of Van" style="width:200px;height:200px">
+                    <h3>Van Montgomery</h3>
+                    <ul>
+                        <li>Third Year Computer Science student with a concentration in Human-Computer Interaction</li>
+                        <li>Minoring in Creative Writing</li>
+                        <li>Excells in UX/UI and artistic design</li>
+                    </ul>
+                </li>
+            </ul>
         </div>
     </body>
 </html>

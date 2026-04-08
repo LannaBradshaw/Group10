@@ -7,7 +7,7 @@ header {
 
 body {
     background-color: #CD9FCC;
-    color: #FAE8EB;
+    color: #431c22;
     font-family: Arial, sans-serif;
     margin: 0;
 }
@@ -24,4 +24,8 @@ nav a {
 
 .page_body{
     padding: 20px;
+}
+
+.bios{
+    list-style-type: none;
 }

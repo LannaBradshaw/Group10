@@ -8,6 +8,7 @@
 
     <body>
         <header>
+            <img src="images/logo.png" alt="Company Logo" class="logo">
             <h1>About Us</h1>
         </header>
 
@@ -30,8 +31,8 @@
                 <h3>Danae Johnson</h3>
             </div>
 
-            <div class="bio">
-                <img class="bio_img" src="images/van_img.jpg" alt="Picture of Van" style="width:170px">
+            <div class="bio" style="padding-bottom: 20px;">
+                <img class="bio_img" src="images/van_img.jpg" alt="Picture of Van" style="width:150px">
                 <h3>Van Montgomery</h3>
                 <ul>
                     <li>Third Year Computer Science student with a concentration in Human-Computer Interaction</li>

@@ -8,7 +8,7 @@
 
     <body>
         <header>
-            <img src="images/logo.png" alt="Company Logo" style="width:200px;height:200px">
+            <img src="images/logo.png" alt="Company Logo" class="logo">
             <h1>HueMaxer</h1>
         </header>
 

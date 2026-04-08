@@ -36,6 +36,7 @@
 
     <body>
         <header>
+            <img src="images/logo.png" alt="Company Logo" class="logo">
             <h1>Color Coordinate</h1>
         </header>
 

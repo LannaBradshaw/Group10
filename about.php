@@ -16,7 +16,7 @@
                 <h3>Van Montgomery</h3>
                 <p>I am a 3rd year computer science student with a concentration in HCI!</p>
                 <p>I also have a minor in Creative Writing!</p>
-                <img src="../images/Van_Picrew_PFP.png" alt="Van PfP" style="width:200px;height:200px">
+                <img src="images/van_img.jpg" alt="Picture of Van" style="width:200px;height:200px">
             </div>
         </div>
     </body>

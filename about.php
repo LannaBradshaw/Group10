@@ -19,6 +19,7 @@
         </nav>
 
         <div class="page_body">
+            <h2>Meet the Team!</h2>
             <div class="bio">
                 <h3>Emma Bass</h3>
             </div>

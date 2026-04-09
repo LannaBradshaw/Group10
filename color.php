@@ -47,10 +47,12 @@
         </nav>
 
         <div class="page_body">
+            <h2>Color Coordinator</h2>
+            <p>Please select your grid size (row and column count) and number of colors</p>
             <form method="POST">
-                Grid Size (1 - 26): <input type = "text" name = "grid_size" />
+                Grid Size (1 - 26): <input type = "text" name = "grid_size" /></br>
                 Number of Colors (1 - 10): <input type = "text" name = "colors" />
-                <input type = "submit" />
+                <button type="submit">Generate</button>
             </form>
             <p><?php echo $message; ?></p>
         </div>

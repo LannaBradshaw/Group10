@@ -77,3 +77,7 @@ a:visited{
     width: 175px;
     margin: 0px;
 }
+
+.color_picker_table{
+    border: 1px solid black;
+}

@@ -27,8 +27,14 @@
                 <h3>Lanna Bradshaw</h3>
             </div>
 
-            <div class="bio">
+            <div class="bio" style="padding-bottom: 20px;">
+                <img class="bio_img" src="images/danaenj-img.jpg" alt="Picture of Danae Johnson" style="width:150px">
                 <h3>Danae Johnson</h3>
+                <ul>
+                    <li>Fourth Year Theatrical Design and Technology student with a concentration in Stage Management</li>
+                    <li>Minoring in Computer Science</li>
+                    <li>Plays with the CSU Women's Rugby Team</li>
+                </ul>
             </div>
 
             <div class="bio" style="padding-bottom: 20px;">

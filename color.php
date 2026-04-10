@@ -33,7 +33,7 @@
         for($i = 0; $i < $color_num; $i++){
             echo 
             '<tr>
-                <td style="width: 20%; border: 1px solid black">
+                <td style="width: 20%">
                     <select>
                         <option value="red">Red</option>
                         <option value="orange">Orange</option>
@@ -47,9 +47,32 @@
                         <option value="teal">Teal</option>
                     </select>
                 </td>
-                <td style="width: 80%; border: 1px solid black"></td>
+                <td style="width: 80%"></td>
             </tr>
             ';
+        }
+        echo "</table>";
+    }
+
+    function make_grid($row_ct){
+        $letter = 'A';
+        $number = 1;
+
+        echo 
+        '<table class="grid">
+            <tr>
+                <td></td>
+        ';
+        for($i = 0; $i < $row_ct; $i++){
+            echo "<th>$letter</th>";
+            $letter++;
+        }
+        for($r = 0; $r < $row_ct; $r++){
+            echo "<tr><th>$number</th>";
+            for($c = 0; $c <= $row_ct; $c++)
+                echo "<td></td>";
+            echo "</tr>";
+            $number++;
         }
         echo "</table>";
     }
@@ -83,9 +106,13 @@
             </form>
             <p><?php echo $message; ?></p>
 
-            <?php
-                if($given_input)
+            <?php 
+                if($given_input){
+                    echo "<h2>Color Selector</h2>";
                     make_color_picker($color_ct);
+                    echo "<h2>Coordinate Grid</h2>";
+                    make_grid($grid_size);
+                }
             ?>
         </div>
     </body>

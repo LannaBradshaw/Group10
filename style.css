@@ -78,6 +78,6 @@ a:visited{
     margin: 0px;
 }
 
-.color_picker_table{
+table, th, td{
     border: 1px solid black;
 }

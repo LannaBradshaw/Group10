@@ -8,6 +8,7 @@ header {
 body {
     background-color: #CD9FCC;
     color: #0A014F;
+    /* contrast value = 8.34*/
     font-family: Arial, sans-serif;
     margin: 0px;
     padding: 0px;
@@ -20,7 +21,7 @@ nav{
     padding-top: 5px;
     padding-bottom: 5px;
 }
-
+/* contrast value = 8.34*/
 nav a{
     color: #CD9FCC;
     padding: 5px;

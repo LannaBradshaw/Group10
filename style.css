@@ -79,10 +79,26 @@ a:visited{
     width: 175px;
     margin: 0px;
 }
-<<<<<<< contrast-value
-=======
 
 table, th, td{
     border: 1px solid black;
 }
->>>>>>> main
+
+th, td{
+    border: 3px solid #0A014F;
+}
+
+table{
+    border-collapse: collapse;
+    background-color: #FAE8EB;
+    table-layout: fixed;
+}
+
+.grid th{
+    background-color: #9f84c0;
+}
+
+.grid th, td{
+    width: 20px;
+    height: 20px;
+}

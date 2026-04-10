@@ -69,7 +69,7 @@
         }
         for($r = 0; $r < $row_ct; $r++){
             echo "<tr><th>$number</th>";
-            for($c = 0; $c <= $row_ct; $c++)
+            for($c = 0; $c < $row_ct; $c++)
                 echo "<td></td>";
             echo "</tr>";
             $number++;

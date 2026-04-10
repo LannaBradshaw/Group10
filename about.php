@@ -24,8 +24,14 @@
                 <h3>Emma Bass</h3>
             </div>
 
-            <div class="bio">
+            <div class="bio" style="padding-bottom: 20px;">
+                <img class="bio_img" src="images/abradsh.jpg" alt="Picture of Lanna Bradshaw" style="width:150px">
                 <h3>Lanna Bradshaw</h3>
+                <ul>
+                    <li>Fourth Year Computer Science General Focus</li>
+                    <li>Minoring in Business administration</li>
+                    <li>Lover of art, music, and the outdoors</li>
+
             </div>
 
             <div class="bio" style="padding-bottom: 20px;">

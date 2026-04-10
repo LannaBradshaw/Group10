@@ -79,3 +79,10 @@ a:visited{
     width: 175px;
     margin: 0px;
 }
+<<<<<<< contrast-value
+=======
+
+table, th, td{
+    border: 1px solid black;
+}
+>>>>>>> main

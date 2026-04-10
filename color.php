@@ -61,7 +61,7 @@
         echo 
         '<table class="grid">
             <tr>
-                <td></td>
+                <td style="background-color: #6C508E;"></td>
         ';
         for($i = 0; $i < $row_ct; $i++){
             echo "<th>$letter</th>";
@@ -69,7 +69,7 @@
         }
         for($r = 0; $r < $row_ct; $r++){
             echo "<tr><th>$number</th>";
-            for($c = 0; $c <= $row_ct; $c++)
+            for($c = 0; $c < $row_ct; $c++)
                 echo "<td></td>";
             echo "</tr>";
             $number++;

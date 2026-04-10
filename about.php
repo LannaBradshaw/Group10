@@ -44,7 +44,7 @@
                 </ul>
             </div>
 
-            <div class="bio" style="padding-bottom: 20px;">
+            <div class="bio">
                 <img class="bio_img" src="images/van_img.jpg" alt="Picture of Van" style="width:150px">
                 <h3>Van Montgomery</h3>
                 <ul>

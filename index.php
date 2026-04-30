@@ -16,6 +16,7 @@
             <a href="index.php">Homepage</a>
             <a href="about.php">About</a>
             <a href="color.php">Color Coordinate</a>
+            <a href="colors.php">Color Selection</a>
         </nav>
 
         <div class="page_body">

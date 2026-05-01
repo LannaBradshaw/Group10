@@ -29,26 +29,33 @@
             $given_input = true;
         }
     }   
+    function make_color_picker($color_num){
+        echo '<form method="GET" action="print.php">';
+        echo '<table class="color_picker_table">';
 
-function make_color_picker($color_num){
-    echo '<form method="GET" action="print.php">';
-    echo '<table class="color_picker_table">';
+        $colors = ["Red","Orange","Yellow","Green","Blue","Purple","Grey","Brown","Black","Teal"];
 
-    $colors = ["Red","Orange","Yellow","Green","Blue","Purple","Grey","Brown","Black","Teal"];
+        for($i = 0; $i < $color_num; $i++){
+            echo '<tr>';
 
-    for($i = 0; $i < $color_num; $i++){
-        echo '<tr><td style="width: 20%">';
+            echo '<td style="width: 30%">';
 
-        echo '<select name="color'.$i.'" onchange="checkDuplicate(this)">';
+            echo '<input type="radio" name="activeColor" value="'.$i.'" '.($i==0?'checked':'').'> ';
 
-        for($j = 0; $j < count($colors); $j++){
-            $selected = ($i == $j) ? "selected" : "";
-            echo '<option value="'.$colors[$j].'" '.$selected.'>'.$colors[$j].'</option>';
-        }
+            echo '<select name="color'.$i.'" onchange="checkDuplicate(this)">';
+            for($j = 0; $j < count($colors); $j++){
+                $selected = ($i == $j) ? "selected" : "";
+                echo '<option value="'.$colors[$j].'" '.$selected.'>'.$colors[$j].'</option>';
+            }
 
         echo '</select>';
+        echo '</td>';
 
-        echo '</td><td style="width: 80%"></td></tr>';
+        echo '<td id="coords'.$i.'" style="width:70%"></td>';
+
+        echo '</tr>';
+
+        
     }
 
     echo "</table>";
@@ -61,29 +68,27 @@ function make_color_picker($color_num){
 }
 
     function make_grid($row_ct){
-        $letter = 'A';
-        $number = 1;
-
-        echo 
-        '<table class="grid">
-            <tr>
-                <td></td>
-        ';
-        for($i = 0; $i < $row_ct; $i++){
-            echo "<th>$letter</th>";
-            $letter++;
+        echo '<table class="grid">';
+        echo '<tr><td></td>';
+        for($c = 0; $c < $row_ct; $c++){
+            echo "<th>".chr(65 + $c)."</th>";
         }
+        echo "</tr>";
+
         for($r = 0; $r < $row_ct; $r++){
-            echo "<tr><th>$number</th>";
-            for($c = 0; $c < $row_ct; $c++)
-                echo "<td></td>";
+            echo "<tr>";
+            echo "<th>".($r+1)."</th>";
+            for($c = 0; $c < $row_ct; $c++){
+                $coord = chr(65 + $c) . ($r + 1);
+                echo "<td class='grid-cell' data-coord='".$coord."'></td>";
+            }
             echo "</tr>";
-            $number++;
         }
         echo "</table>";
     }
 ?>
 
+<!DOCTYPE html>
 <html>
     <head>
         <title>Color Coordinate - HueMaxer</title>
@@ -118,6 +123,7 @@ function make_color_picker($color_num){
                 if($given_input){
                     echo "<h2>Color Selector</h2>";
                     make_color_picker($color_ct);
+                    
                     echo "<h2>Coordinate Grid</h2>";
                     make_grid($grid_size);
                     
@@ -126,11 +132,48 @@ function make_color_picker($color_num){
         </div>
 
         <script>
+        let activeColorIndex = 0;
+        let colorCoordinates = {};
         let previousValues = {};
+
+        document.addEventListener("change", function(e) {
+            if (e.target.name === "activeColor") {
+                activeColorIndex = parseInt(e.target.value);
+            }
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".grid-cell").forEach(cell => {
+                cell.addEventListener("click", function () {
+                    let coord = this.dataset.coord;
+                    let selects = document.querySelectorAll("select");
+                    let color = selects[activeColorIndex].value;
+                    
+                    this.style.backgroundColor = color;
+
+                    if (!colorCoordinates[color]) {
+                        colorCoordinates[color] = [];
+                    }
+                    if (!colorCoordinates[color].includes(coord)) {
+                        colorCoordinates[color].push(coord);
+                        colorCoordinates[color].sort();
+                    }
+                    updateCoordinateDisplay();
+                });
+            });
+        });
+        function updateCoordinateDisplay() {
+            document.querySelectorAll("select").forEach((select, i) => {
+                let color = select.value;
+                let coords = colorCoordinates[color] || [];
+                document.getElementById("coords" + i).textContent = coords.join(", ");
+            });
+        }
+        
         function checkDuplicate(selectElement) {
             const selects = document.querySelectorAll("select");
             let currentValue = selectElement.value;
             let index = Array.from(selects).indexOf(selectElement);
+
             if (!(index in previousValues)) {
                 previousValues[index] = currentValue;
             }
@@ -139,26 +182,39 @@ function make_color_picker($color_num){
                 if (i !== index && selects[i].value === currentValue) {
                     selectElement.value = previousValues[index];
                     showMessage("That color is already selected!");
-                return;
+                    return;
                 }
             }
+            let oldColor = previousValues[index];
+            let newColor = currentValue;
+
+            recolorGrid(oldColor, newColor);
             previousValues[index] = currentValue;
         }
         
-        function showMessage(msg) {
-            let messageBox = document.getElementById("colorMessage");
-
-            if (!messageBox) {
-                messageBox = document.createElement("p");
-                messageBox.id = "colorMessage";
-                messageBox.style.color = "red";
-                document.querySelector(".page_body").prepend(messageBox);
+        function recolorGrid(oldColor, newColor) {
+            document.querySelectorAll(".grid-cell").forEach(cell => {
+                if (cell.style.backgroundColor === oldColor) {
+                    cell.style.backgroundColor = newColor;
+                }
+            });
+            if (colorCoordinates[oldColor]) {
+                colorCoordinates[newColor] = colorCoordinates[oldColor];
+                delete colorCoordinates[oldColor];
             }
-            messageBox.textContent = msg;
-            setTimeout(() => {
-                messageBox.textContent = "";
-            }, 2000);
+            updateCoordinateDisplay();
         }
+        function showMessage(msg) {
+            let box = document.getElementById("colorMessage");
+            if (!box) {
+                box = document.createElement("p");
+                box.id = "colorMessage";
+                box.style.color = "red";
+                document.querySelector(".page_body").prepend(box);
+            }
+            box.textContent = msg;
+            setTimeout(() => {box.textContent = "";}, 2000);
+            }
         </script>
     </body>
 </html>

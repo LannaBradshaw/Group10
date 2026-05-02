@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <?php
+    //require_once("db.php");
     $grid_error = "";
     $color_error = "";
     $given_input = false;
@@ -20,8 +21,12 @@
             $color_error = "Color count must be an integer";
         } else {
             $color_ct = intval($_POST['colors']);
-            if($color_ct < 1 || $color_ct > 10){
-                $color_error = "Color count must be between 1 and 10";
+            $result = $conn->query("SELECT COUNT(*) as total FROM colors");
+            $row = $result->fetch_assoc();
+            $max_colors = $row['total'];
+
+            if($color_ct < 1 || $color_ct > $max_colors){
+                $color_error = "Color count must be between 1 and $max_colors";
             }
         }
 
@@ -33,7 +38,12 @@
         echo '<form method="GET" action="print.php">';
         echo '<table class="color_picker_table">';
 
-        $colors = ["Red","Orange","Yellow","Green","Blue","Purple","Grey","Brown","Black","Teal"];
+       $result = $conn->query("SELECT name, hex_value FROM colors");   
+       $colors = [];
+
+       while($row = $result->fetch_assoc()){
+            $colors[] = $row;
+        }
 
         for($i = 0; $i < $color_num; $i++){
             echo '<tr>';
@@ -45,7 +55,9 @@
             echo '<select name="color'.$i.'" onchange="checkDuplicate(this)">';
             for($j = 0; $j < count($colors); $j++){
                 $selected = ($i == $j) ? "selected" : "";
-                echo '<option value="'.$colors[$j].'" '.$selected.'>'.$colors[$j].'</option>';
+                echo '<option value="'.$colors[$j]['hex_value'].'" '.$selected.'>';
+                echo $colors[$j]['name'];
+                echo '</option>';
             }
 
         echo '</select>';
@@ -64,6 +76,7 @@
     echo '<input type="hidden" name="colors" value="'.$GLOBALS['color_ct'].'">';
 
     echo '<br><button type="submit">Printable View</button>';
+    echo 'input type="hidden" name="colorData" id="colorData">';
     echo '</form>';
 }
 
@@ -149,13 +162,20 @@
                     let color = selects[activeColorIndex].value;
                     
                     this.style.backgroundColor = color;
+                    this.dataset.color = color;
 
                     if (!colorCoordinates[color]) {
                         colorCoordinates[color] = [];
                     }
                     if (!colorCoordinates[color].includes(coord)) {
                         colorCoordinates[color].push(coord);
-                        colorCoordinates[color].sort();
+                        colorCoordinates[color].sort((a,b)=>{
+                            if(a[0] === b[0]){
+                                return parseInt(a.slice(1)) - parseInt(b.slice(1));
+                            }
+                            return a.charCodeAt(0) - b.charCodeAt(0);
+                        }):
+                        }
                     }
                     updateCoordinateDisplay();
                 });
@@ -194,7 +214,8 @@
         
         function recolorGrid(oldColor, newColor) {
             document.querySelectorAll(".grid-cell").forEach(cell => {
-                if (cell.style.backgroundColor === oldColor) {
+                if (cell.dataset.color === oldColor) {
+                    cell.dateset.color = newColor;
                     cell.style.backgroundColor = newColor;
                 }
             });
@@ -215,6 +236,10 @@
             box.textContent = msg;
             setTimeout(() => {box.textContent = "";}, 2000);
             }
+
+        document.querySelector("form").addEventListener("submit", function() {
+            document.getElementById("colorData").value = JSON.stringify(colorCoordinates);
+        });
         </script>
     </body>
 </html>

@@ -1,12 +1,19 @@
 <?php
-$host = "localhost";
-$user = "root";
-$password = "";
-$dbname = "colors_dynamic";
+    define('DB_HOST', 'helmi.cs.colostate.edu');
+    define('DB_USER', 'NETID GOES HERE');
+    define('DB_PASS', 'PASSWORD GOES HERE');
+    define('DB_NAME', 'NETID GOES HERE AGAIN');
 
-$conn = new mysqli($host, $user, $password, $dbname);
+    define('SSL_CERT', '/usr/local/ssl/server-cert.pem');
+    define('SSL_CA',   '/usr/local/ssl/ca-cert.pem');
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+    $conn = mysqli_init();
+    if (!$conn) {
+        die('mysqli_init failed.');
+    }
+    $conn->ssl_set(SSL_CERT, NULL, SSL_CA, NULL, NULL);
+    mysqli_options($conn, MYSQLI_OPT_SSL_VERIFY_SERVER_CERT, true);
+    if (!mysqli_real_connect($conn, DB_HOST, DB_USER, DB_PASS, DB_NAME)) {
+        die('Connection failed: ' . mysqli_connect_error());
+    }
 ?>

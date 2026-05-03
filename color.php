@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <?php
-    //require_once("db.php");
+    require_once("db.php");
     $grid_error = "";
     $color_error = "";
     $given_input = false;
@@ -35,6 +35,7 @@
         }
     }   
     function make_color_picker($color_num){
+        global $conn;
         echo '<form method="GET" action="print.php">';
         echo '<table class="color_picker_table">';
 
@@ -59,6 +60,7 @@
                 echo $colors[$j]['name'];
                 echo '</option>';
             }
+            
 
         echo '</select>';
         echo '</td>';
@@ -198,7 +200,7 @@
                 previousValues[index] = currentValue;
             }
 
-            for (let i = 0; i < selects.length; i++) {
+            for(let i = 0; i < selects.length; i++){
                 if (i !== index && selects[i].value === currentValue) {
                     selectElement.value = previousValues[index];
                     showMessage("That color is already selected!");
@@ -215,7 +217,7 @@
         function recolorGrid(oldColor, newColor) {
             document.querySelectorAll(".grid-cell").forEach(cell => {
                 if (cell.dataset.color === oldColor) {
-                    cell.dateset.color = newColor;
+                    cell.dataset.color = newColor;
                     cell.style.backgroundColor = newColor;
                 }
             });

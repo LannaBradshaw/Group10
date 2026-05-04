@@ -12,7 +12,7 @@
     }
 
     table {
-        width: 100%;
+        max-width: 100%;
         border-collapse: collapse;
         margin-bottom: 20px;
     }
@@ -27,7 +27,7 @@
 
     @page {
         size: 8.5in 11in;
-        margin: 0in;
+        margin: .5in;
     }
 
     @media print {

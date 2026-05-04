@@ -39,10 +39,10 @@
         echo '<form method="GET" action="print.php">';
         echo '<table class="color_picker_table">';
 
-       $result = $conn->query("SELECT name, hex_value FROM colors");   
-       $colors = [];
+        $result = $conn->query("SELECT name, hex_value FROM colors");   
+        $colors = [];
 
-       while($row = $result->fetch_assoc()){
+        while($row = $result->fetch_assoc()){
             $colors[] = $row;
         }
 
@@ -60,17 +60,12 @@
                 echo $colors[$j]['name'];
                 echo '</option>';
             }
-            
+            echo '</select>';
 
-        echo '</select>';
-        echo '</td>';
-
-        echo '<td id="coords'.$i.'" style="width:70%"></td>';
-
-        echo '</tr>';
-
-        
-    }
+            echo '</td>';
+            echo '<td id="coords'.$i.'" style="width:70%"></td>';
+            echo '</tr>';        
+        }
 
     echo "</table>";
 
@@ -80,7 +75,7 @@
     echo '<br><button type="submit">Printable View</button>';
     echo 'input type="hidden" name="colorData" id="colorData">';
     echo '</form>';
-}
+    }
 
     function make_grid($row_ct){
         echo '<table class="grid">';
@@ -157,11 +152,19 @@
             }
         });
         document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll("select").forEach((select, i) => {
+                previousValues[i] = select.value;
+            });
             document.querySelectorAll(".grid-cell").forEach(cell => {
-                cell.addEventListener("click", function () {
+                cell.addEventListener("click", function() {
                     let coord = this.dataset.coord;
                     let selects = document.querySelectorAll("select");
                     let color = selects[activeColorIndex].value;
+
+                    let oldColor = this.dataset.color;
+                    if(oldColor && colorCoordinates[oldColor]){
+                        colorCoordinates[oldColor] = colorCoordinates[oldColor].filter(c => c !== coord);
+                    }
                     
                     this.style.backgroundColor = color;
                     this.dataset.color = color;
@@ -176,8 +179,7 @@
                                 return parseInt(a.slice(1)) - parseInt(b.slice(1));
                             }
                             return a.charCodeAt(0) - b.charCodeAt(0);
-                        }):
-                        }
+                        });
                     }
                     updateCoordinateDisplay();
                 });
@@ -189,8 +191,7 @@
                 let coords = colorCoordinates[color] || [];
                 document.getElementById("coords" + i).textContent = coords.join(", ");
             });
-        }
-        
+        }  
         function checkDuplicate(selectElement) {
             const selects = document.querySelectorAll("select");
             let currentValue = selectElement.value;

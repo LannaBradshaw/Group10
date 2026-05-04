@@ -1,8 +1,8 @@
 <?php
     define('DB_HOST', 'helmi.cs.colostate.edu');
-    define('DB_USER', 'NETID GOES HERE');
-    define('DB_PASS', 'PASSWORD GOES HERE');
-    define('DB_NAME', 'NETID GOES HERE AGAIN');
+    define('DB_USER', 'vazenroy');
+    define('DB_PASS', 'Bellaboo2009!!!');
+    define('DB_NAME', 'vazenroy');
 
     define('SSL_CERT', '/usr/local/ssl/server-cert.pem');
     define('SSL_CA',   '/usr/local/ssl/ca-cert.pem');

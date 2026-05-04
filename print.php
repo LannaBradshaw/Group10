@@ -21,19 +21,21 @@
         border: 1px solid black;
         text-align: center;
         padding: 5px;
-        height: 30px;
-        width: 30px;
+        height: 20px;
+        width: 20px;
     }
 
     @page {
-        size: letter portrait;
-        margin: 1in;
+        size: 8.5in 11in;
+        margin: 0in;
     }
 
     @media print {
         button {
             display: none;
         }
+
+        
     }
     </style>
 

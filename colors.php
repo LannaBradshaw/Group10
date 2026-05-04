@@ -4,7 +4,31 @@
     require_once("db.php");
 
     if(isset($_POST['new_color']) && isset($_POST['new_hex'])){
-        
+        $last_id = "SELECT * FROM colors WHERE id = (SELECT MAX(id) FROM colors)";
+        $conn->query("INSERT INTO colors VALUES($last_id, new_color, new_hex)");
+    }
+
+    function printColors(){
+        global $conn;
+        $result = $conn->query("SELECT * FROM colors;");
+        if($result -> num_rows > 0){
+            echo "<table>
+                    <tr>
+                        <th>Color Name</th>
+                        <th>Hex Code</th>
+                        <th>Preview</th>
+                    <tr>";
+            while($row = $result->fetch_assoc()){
+                echo "<tr>
+                        <td>{$row['name']}</td>
+                        <td>{$row['hex_value']}</td>
+                        <td></td>
+                    </tr>";
+            }
+        }
+        else{
+            echo "<tr><td colspan='3'>No data found</td></tr>";
+        }
     }
 ?>
 
@@ -44,6 +68,9 @@
             </form>
             <h2>Delete a Color</h2>
             <h2>Current Colors</h2>
+            <?php
+                printColors();
+            ?>
         </div>
     </body>
 </html>

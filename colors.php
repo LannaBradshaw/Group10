@@ -2,10 +2,53 @@
 
 <?php
     require_once("db.php");
+    $error_msg = "";
 
     if(isset($_POST['new_color']) && isset($_POST['new_hex'])){
-        $last_id = "SELECT * FROM colors WHERE id = (SELECT MAX(id) FROM colors)";
-        $conn->query("INSERT INTO colors VALUES($last_id, new_color, new_hex)");
+        $name = $_POST['new_color'];
+        $hex = strtoupper($_POST['new_hex']);
+
+        if(testValues($name, $hex)){
+            $to_insert = $conn->prepare("INSERT INTO colors (name, hex_value) VALUES (?, ?)");
+            $to_insert->bind_param("ss", $name, $hex);
+            $to_insert->execute();
+            $to_insert->close();
+        }
+    }
+
+    function testValues($name, $hex){
+        global $conn;
+        
+        if(!preg_match('/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $hex)){
+            $error_msg = "Invalid hex code!";
+            exit();
+        }
+
+        $name_test = $conn->prepare("SELECT id FROM colors WHERE name = ?");
+        $name_test->bind_param("s", $name);
+        $name_test->execute();
+        $name_result = $name_test->get_result();
+        $name_test->close();
+
+        $hex_test = $conn->prepare("SELECT id FROM colors WHERE hex_value = ?");
+        $hex_test->bind_param("s", $hex);
+        $hex_test->execute();
+        $hex_result = $hex_test->get_result();
+        $hex_test->close();
+
+        if($name_result->num_rows > 0 && $hex_result->num_rows > 0){
+            $error_msg = "Color name AND hex code are already used in the database!";
+        }
+        elseif($name_result->num_rows > 0){
+            $error_msg = "Color name is already used in the database!";
+        }
+        elseif($hex_result->num_rows > 0){
+            $error_msg = "Hex value is already used in the database!";
+        } 
+        else{
+            return true;
+        }
+        return false;
     }
 
     function printColors(){
@@ -60,6 +103,11 @@
                 Hex Value: <input type = "text" name = "new_hex" placeholder = "#E0AFFF"/>
                 <button type="submit">Add Color</button>
             </form>
+            <?php
+                if(!empty($error_msg)) {
+                    echo "<b><p class='error'>$error_msg</p></b>";
+                }
+            ?>
             <h2>Edit a Color</h2>
             <form method="POST">
                 New Name: <input type = "text" name = "edit_color"/></br>

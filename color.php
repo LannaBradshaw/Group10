@@ -162,7 +162,7 @@
                     let color = selects[activeColorIndex].value;
 
                     let oldColor = this.dataset.color;
-                    if(oldColor && colorCoordinates[oldColor]){
+                    if(oldColor && colorCoordinates[oldColor]) {
                         colorCoordinates[oldColor] = colorCoordinates[oldColor].filter(c => c !== coord);
                     }
                     

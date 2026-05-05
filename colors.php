@@ -8,7 +8,7 @@
         $name = $_POST['new_color'];
         $hex = strtoupper($_POST['new_hex']);
 
-        if(testValueDupe($name, $hex)){
+        if ($name !== "" && $hex !== "" && testValueDupe($name, $hex)) {
             $to_insert = $conn->prepare("INSERT INTO colors (name, hex_value) VALUES (?, ?)");
             $to_insert->bind_param("ss", $name, $hex);
             $to_insert->execute();
@@ -21,7 +21,7 @@
         $name = $_POST['edit_color'];
         $hex = strtoupper($_POST['edit_hex']);
 
-        if(testValueDupe($name, $hex)){
+        if ($name !== "" && $hex !== "" && testValueDupe($name, $hex)) {
             $to_update = $conn->prepare("UPDATE colors SET name = ?, hex_value = ? WHERE hex_value = ?");
             $to_update->bind_param("sss", $name, $hex, $color_to_replace);
             $to_update->execute();
@@ -77,18 +77,16 @@
             $hex_result = $hex_test->get_result();
             $hex_test->close();
 
-            if($name_result->num_rows > 0 && $hex_result->num_rows > 0){
-                $error_msg = "Color name AND hex code are already used in the database!";
+            $check = $conn->prepare("SELECT id FROM colors WHERE name = ? OR hex_value = ?");
+            $check->bind_param("ss", $name, $hex);
+            $check->execute();
+            $result = $check->get_result();
+
+            if($result->num_rows > 0){
+                $error_msg = "Color name or hex already exists!";
+                return false;
             }
-            elseif($name_result->num_rows > 0){
-                $error_msg = "Color name is already used in the database!";
-            }
-            elseif($hex_result->num_rows > 0){
-                $error_msg = "Hex value is already used in the database!";
-            } 
-            else{
-                return true;
-            }
+            return true;
         }
         return false;
     }
@@ -104,16 +102,18 @@
                         <th>Preview</th>
                     <tr>";
             while($row = $result->fetch_assoc()){
-                echo "<tr>
-                        <td>{$row['name']}</td>
-                        <td>{$row['hex_value']}</td>
-                        <td></td>
-                    </tr>";
+                echo "<tr>";
+                        echo "<td>{$row['name']}</td>";
+                        echo "<td>{$row['hex_value']}</td>";
+                        $color = $row['hex_value'];
+                        echo "<td style='background-color:$color; width:50px;'></td>";
+                    echo "</tr>";
             }
         }
         else{
-            echo "<tr><td colspan='3'>No data found</td></tr>";
+            echo "<tr><tdv colspan='3'>No data found</td></tr>";
         }
+
     }
 ?>
 

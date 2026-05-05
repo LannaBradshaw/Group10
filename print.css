@@ -1,0 +1,132 @@
+body {
+        background: white;
+        color: black;
+        text-align: center;
+        font-family: Arial, sans-serif;
+        width: 8.5in;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    table {
+        max-width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    td, th {
+        border: 1px solid black;
+        text-align: center;
+        padding: 5px;
+        height: 20px;
+        width: 20px;
+    }
+
+    table {
+    margin: 0 auto 20px auto;
+    }
+
+.print-btn {
+    background-color: #555;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: 0.2s ease;
+}
+
+.print-btn:hover {
+    background-color: #777;
+    transform: scale(1.05);
+}
+
+.print-btn:active {
+    transform: scale(0.98);
+}
+
+.back-btn {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 20px auto;
+    padding: 10px 18px;
+    background-color: #555;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    text-align: center;
+}
+.back-btn:hover {
+    background-color: #777;
+}
+
+.coord-cell {
+    background-color: white;
+    text-align: left;
+    padding: 10px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #999;
+}
+.table-header {
+    background-color: #666;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+}
+
+.color-cell {
+    background-color: #e6e6e6;
+    font-weight: bold;
+    text-align: left;
+    padding: 10px;
+}
+
+.coord-cell {
+    background-color: white;
+    text-align: left;
+    padding: 10px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #999;
+}
+
+.logo {
+    width: 100px;
+    }
+
+    @page {
+        size: 8.5in 11in;
+        margin: .5in;
+    }
+
+   @media print {
+    .print-btn {
+        display: none;
+    }
+
+    .back-btn {
+        display: none;
+    }
+
+    body {
+        filter: grayscale(100%);
+    }
+}

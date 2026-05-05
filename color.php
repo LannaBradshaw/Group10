@@ -48,10 +48,10 @@
 
         for($i = 0; $i < $color_num; $i++){
             echo '<tr>';
-
-            echo '<td style="width: 30%">';
-
-            echo '<input type="radio" name="activeColor" value="'.$i.'" '.($i==0?'checked':'').'> ';
+            echo '<td style="width:30%;">';
+            echo '<label>';
+            echo '<input type="radio" name="activeColor" class="dropdown"value="'.$i.'" '.($i==0?'checked':'').'> ';
+            echo '<label>';
 
             echo '<select name="color'.$i.'" onchange="checkDuplicate(this)">';
             for($j = 0; $j < count($colors); $j++){
@@ -73,7 +73,7 @@
     echo '<input type="hidden" name="colors" value="'.$GLOBALS['color_ct'].'">';
 
     echo '<br><button type="submit">Printable View</button>';
-    echo 'input type="hidden" name="colorData" id="colorData">';
+    echo '<input type="hidden" name="colorData" id="colorData">';
     echo '</form>';
     }
 
@@ -107,8 +107,7 @@
 
     <body>
         <header>
-            <img src="images/logo.png" alt="Company Logo" class="logo">
-            <h1>Color Coordinate</h1>
+            <img src="images/logo.png" alt="Company Logo" class="logo"> <h1>Color Coordinate</h1>
         </header>
 
         <nav>
@@ -119,11 +118,19 @@
         </nav>
 
         <div class="page_body">
-            <h2>Color Coordinator</h2>
+            <h2 class="section-title">Color Coordinator</h2>
             <p>Please select your grid size (row and column count) and number of colors</p>
-            <form method="POST">
-                Grid Size (1 - 26): <input type = "text" name = "grid_size" /></br>
-                Number of Colors (1 - 10): <input type = "text" name = "colors" />
+            <form method="POST" class="input-form">
+                <label>
+                    Grid Size (1–26)
+                    <input type="text" name="grid_size">
+                </label>
+
+                <label>
+                    Number of Colors
+                    <input type="text" name="colors">
+                 </label>
+
                 <button type="submit">Generate</button>
             </form>
             <p style="color:red;"><?php echo $grid_error; ?></p>
@@ -131,10 +138,10 @@
 
             <?php 
                 if($given_input){
-                    echo "<h2>Color Selector</h2>";
+                    echo '<h2 class="section-title color-title">Color Section</h2>';
                     make_color_picker($color_ct);
                     
-                    echo "<h2>Coordinate Grid</h2>";
+                    echo '<h2 class="section-title grid-title">Coordinate Section</h2>';
                     make_grid($grid_size);
                     
                 }

@@ -1,104 +1,171 @@
-header {
-    background-color: #E4C2C6;
-    color: #0A014F;
-    /* contrast value = 11.35*/
-    padding: 20px;
-    text-align: center;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    background-color: #CD9FCC;
-    color: #0A014F;
-    /* contrast value = 8.34*/
     font-family: Arial, sans-serif;
-    margin: 0px;
-    padding: 0px;
+    background-color: #BEB7DF;
+    color: #34114F;
+    line-height: 1.4;
 }
 
-nav{
-    text-align: center;
-    width: 100%;
-    background-color: #0A014F;
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-/* contrast value = 8.34*/
-nav a{
-    color: #CD9FCC;
-    padding: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-    font-size: medium;
-}
-
-a:link{
-    color: #CD9FCC;
-    background-color: transparent;
-    text-decoration: none;
-}
-a:hover{
-    color: #CD9FCC;
-    text-decoration: underline;
-    padding: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-a:visited{
-    background-color: transparent;
-    text-decoration: none;
-}
-
-.container {
+.page_body {
+    max-width: 900px;
+    margin: 0 auto;
     padding: 20px;
+    border-radius: 10px;
 }
 
-.page_body{
-    padding: 20px;
-    margin-left: 15%;
-    margin-right: 15%
-}
-
-.bio{
-    background-color: #FAE8EB;
-    border-radius: 25px;
-    padding: 10px;
-    margin: auto;
+.page_body p {
     margin-bottom: 15px;
-    width: 50%;
 }
 
-.bio_img{
-    float: left;
-    margin: 0px;
-    margin-right: 30px;
-    border-radius: 15px;
-    border: 5px solid #6C508E;
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
 }
 
-.logo{
-    width: 175px;
-    margin: 0px;
+.logo {
+    height: 60px;
+    display: block;
+    margin: 0 auto 10px auto;
 }
 
-table, th, td{
-    border: 1px solid black;
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    background-color: #2c1454;
+    padding: 10px;
 }
 
-th, td{
-    border: 3px solid #0A014F;
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-table{
+nav a:hover {
+    text-decoration: underline;
+}
+
+
+.page_body {
+    padding: 20px;
+}
+
+input, select, button {
+    padding: 6px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background-color: #34114F;
+    color: white;
+    cursor: pointer;
+    width: 100px;
+    padding: 5px;
+}
+
+button:hover {
+    background-color: #6C508E;
+}
+
+.color_picker_table {
     border-collapse: collapse;
-    background-color: #FAE8EB;
-    table-layout: fixed;
+    margin-top: 15px;
+    width: 100%;
 }
 
-.grid th{
-    background-color: #9f84c0;
+.color_picker_table td {
+    padding: 8px;
+    vertical-align: middle;
+    border: none;
 }
 
-.grid th, td{
-    width: 20px;
-    height: 20px;
+.grid {
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.grid th, .grid td {
+    border: 2px solid #34114F;
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    background-color: white;
+}
+
+.grid-cell {
+    cursor: pointer;
+}
+
+.error {
+    color: red;
+    margin-top: 10px;
+}
+
+.input-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 250px;
+}
+
+.input-form label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+}
+
+.input-form input {
+    margin-top: 5px;
+    width: 100px;
+    padding: 5px;
+}
+.dropdown {
+    padding: 6px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: white;
+    cursor: pointer;
+}
+
+.section-title {
+    padding-bottom: 8px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+.grid-title, .color-title {
+    color: #34114F;
+    border-color: #34114F;
+}
+
+@media print {
+    nav, button, form {
+        display: none !important;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    table {
+        page-break-inside: avoid;
+    }
+
+    td, th {
+        border: 1px solid black !important;
+    }
 }

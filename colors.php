@@ -29,6 +29,34 @@
         }
     }
 
+
+    $confirm_delete = false;
+    $delete_color = null;
+    if(isset($_POST['delete_request'])){
+        $delete_color = $_POST['color'];
+
+        $count = $conn->prepare("SELECT COUNT(*) AS total FROM colors");
+        $count->execute();
+
+        $result = $count->get_result();
+        $row = $result->fetch_assoc();
+
+        if($row['total'] < 2){
+            $error_msg = "There must be at least 2 colors in the database";
+        } else{
+            $confirm_delete = true;
+        }
+    }
+
+    if(isset($_POST['confirm_delete'])){
+        $color = $_POST['delete_color'];
+        $for_confirm = $conn->prepare("DELETE FROM colors WHERE hex_value = ?");
+        $for_confirm->bind_param("s", $color);
+        $for_confirm->execute();
+        $for_confirm->close();
+
+    }
+
     function testValueDupe($name, $hex){
         global $conn;
         global $error_msg;
@@ -143,6 +171,46 @@
                 <button type="submit">Save Changes</button>
             </form>
             <h2>Delete a Color</h2>
+
+            <?php if(!$confirm_delete){ ?>
+            <form method="POST">
+                <?php
+                    global $conn;
+
+                    $colors = $conn->query("SELECT name, hex_value FROM colors;");
+
+                    echo 'Select Color: <select name="color" onchange="checkDuplicate(this)">';
+                    while($row = $colors->fetch_assoc()){
+                        echo '<option value="'.$row['hex_value'].'">';
+                        echo $row['name'];
+                        echo '</option>';
+                    }
+                    echo '</select><br>';
+                ?>
+                <button type ="submit" name="delete_request">Delete</button>
+            </form>
+            <?php } else { ?>
+
+
+            <form method="POST">
+                <?php
+                    global $conn;
+
+                    $colors = $conn->query("SELECT name, hex_value FROM colors;");
+
+                    echo 'Select Color: <select name="color" onchange="checkDuplicate(this)">';
+                    while($row = $colors->fetch_assoc()){
+                        echo '<option value="'.$row['hex_value'].'">';
+                        echo $row['name'];
+                        echo '</option>';
+                    }
+                    echo '</select><br>';
+                ?>
+                <input type="hidden" name="delete_color" value="<?php echo $delete_color; ?>">
+                <button type="submit" name="confirm_delete">Confirm</button>
+            </form>
+
+            <?php } ?>
             <h2>Current Colors</h2>
             <?php
                 printColors();

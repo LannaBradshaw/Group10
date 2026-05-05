@@ -12,7 +12,7 @@
     }
 
     table {
-        width: 100%;
+        max-width: 100%;
         border-collapse: collapse;
         margin-bottom: 20px;
     }
@@ -21,19 +21,21 @@
         border: 1px solid black;
         text-align: center;
         padding: 5px;
-        height: 30px;
-        width: 30px;
+        height: 20px;
+        width: 20px;
     }
 
     @page {
-        size: letter portrait;
-        margin: 1in;
+        size: 8.5in 11in;
+        margin: .5in;
     }
 
     @media print {
         button {
             display: none;
         }
+
+        
     }
     </style>
 
